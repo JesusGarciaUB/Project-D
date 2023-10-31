@@ -696,68 +696,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6235155460996112234, guid: 29e930fb6fef54b45ae74883dedde520, type: 3}
-      propertyPath: m_Height
-      value: 2.11
-      objectReference: {fileID: 0}
-    - target: {fileID: 6235155460996112234, guid: 29e930fb6fef54b45ae74883dedde520, type: 3}
-      propertyPath: m_Center.y
-      value: 1.1
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 6235155460996112234, guid: 29e930fb6fef54b45ae74883dedde520, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1382961842130069925, guid: 29e930fb6fef54b45ae74883dedde520, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1661641762}
-    - targetCorrespondingSourceObject: {fileID: 1382961842130069925, guid: 29e930fb6fef54b45ae74883dedde520, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1661641763}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 29e930fb6fef54b45ae74883dedde520, type: 3}
 --- !u!1 &1661641760 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1382961842130069925, guid: 29e930fb6fef54b45ae74883dedde520, type: 3}
   m_PrefabInstance: {fileID: 1661641759}
   m_PrefabAsset: {fileID: 0}
---- !u!195 &1661641762
-NavMeshAgent:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1661641760}
-  m_Enabled: 1
-  m_AgentTypeID: 0
-  m_Radius: 0.56
-  m_Speed: 4
-  m_Acceleration: 10
-  avoidancePriority: 50
-  m_AngularSpeed: 1000
-  m_StoppingDistance: 0
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: 2.1
-  m_BaseOffset: 0
-  m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
---- !u!114 &1661641763
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1661641760}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6cd68f49bed47dc44b2a8e4571339525, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  clicableArea:
-    serializedVersion: 2
-    m_Bits: 512
 --- !u!1 &1712674714
 GameObject:
   m_ObjectHideFlags: 0
