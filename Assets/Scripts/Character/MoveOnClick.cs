@@ -25,5 +25,13 @@ public class MoveOnClick : MonoBehaviour
                 myAgent.SetDestination(hit.point);
             }
         }
+
+        
+    }
+
+    //Getters
+    public bool isMoving()
+    {
+        return myAgent.velocity.x == 0 && myAgent.velocity.z == 0;
     }
 }
