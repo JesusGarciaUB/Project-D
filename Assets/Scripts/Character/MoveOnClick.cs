@@ -32,6 +32,6 @@ public class MoveOnClick : MonoBehaviour
     //Getters
     public bool isMoving()
     {
-        return myAgent.velocity.x == 0 && myAgent.velocity.z == 0;
+        return myAgent.remainingDistance >= 0.3f;
     }
 }
