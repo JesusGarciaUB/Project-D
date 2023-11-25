@@ -40,6 +40,6 @@ public class EnemyBehaviour : MonoBehaviour
 
     public void MouseOverMob()
     {
-        
+        player.GetComponent<CombatSystem>().target = this.gameObject;
     }
 }

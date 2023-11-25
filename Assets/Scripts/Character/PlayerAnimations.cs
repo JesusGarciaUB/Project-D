@@ -15,6 +15,9 @@ public class PlayerAnimations : MonoBehaviour
 
     private void Update()
     {
-        animator.SetBool("isMoving", player.isMoving());
+
+        animator.SetBool("isAttacking", player.isAttacking());
+        if (!player.attacking) animator.SetBool("isMoving", player.isMoving());
+        else animator.SetBool("isMoving", false);
     }
 }
