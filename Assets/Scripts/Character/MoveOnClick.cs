@@ -14,7 +14,6 @@ public class MoveOnClick : MonoBehaviour
     //AUXILIARES
     private Vector3 destination;
     private CombatSystem combatSystem;
-    private bool attackedThisFrame = false;
     public bool attacking = false;
 
     //CONTROLADORES DE DONDE ESTA EL RATON
@@ -35,7 +34,6 @@ public class MoveOnClick : MonoBehaviour
     private void Update()
     {
         //Setup por frame
-        attackedThisFrame = false;
         MouseOver();
 
         //Si el raton esta encima de un enemigo, el enemigo se pone como target en el script de combatsystem
@@ -48,8 +46,8 @@ public class MoveOnClick : MonoBehaviour
         //Esto es setup tambien, pero debe ir despues de settear el enemigo como target
         onRange = combatSystem.OnRange();
 
-        //comprovamos que no estemos en medio de atacar
-        if (!attacking)
+        //comprovamos que no estemos en medio de atacar ni que estemos muertos
+        if (!attacking && combatSystem.isAlive)
         {
             //Click izquierdo
             if (Input_Manager._INPUT_MANAGER.GetClickPressed())
@@ -61,14 +59,13 @@ public class MoveOnClick : MonoBehaviour
                     myAgent.SetDestination(hitGround);
                 }
                 //Si pulsamos en un enemigo y estamos a rango
-                else if (onRange)
+                else if (onEnemy && onRange)
                 {
-                    attackedThisFrame = true;
                     Attacking();
+                    combatSystem.attackTarget = combatSystem.target;
 
+                    myAgent.SetDestination(myAgent.transform.position);
                     destination = myAgent.transform.position;
-                    myAgent.isStopped = true;
-                    myAgent.ResetPath();
                     myAgent.transform.LookAt(combatSystem.target.transform);
                 }
             }
@@ -102,6 +99,6 @@ public class MoveOnClick : MonoBehaviour
 
     public bool isAttacking()
     {
-        return attackedThisFrame;
+        return attacking;
     }
 }

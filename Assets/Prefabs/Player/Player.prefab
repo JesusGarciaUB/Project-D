@@ -126,6 +126,7 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 64
+  attacking: 0
 --- !u!114 &7764865850586164384
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -151,4 +152,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  basicAttackRange: 4
+  basicAttackRange: 3
+  basicAttackDamage: 10
