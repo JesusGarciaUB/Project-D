@@ -33,7 +33,14 @@ public class MoveOnClick : MonoBehaviour
     }
     private void Update()
     {
-        //Setup por frame
+        //si estamos muertos hacemos reset al movimiento del agente
+        if (!combatSystem.isAlive)
+        {
+            myAgent.SetDestination(myAgent.transform.position);
+            destination = myAgent.transform.position;
+        }
+
+        //Setup por frame del raycast
         MouseOver();
 
         //Si el raton esta encima de un enemigo, el enemigo se pone como target en el script de combatsystem

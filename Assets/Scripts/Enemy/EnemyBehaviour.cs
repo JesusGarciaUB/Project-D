@@ -9,11 +9,13 @@ public class EnemyBehaviour : MonoBehaviour
     private NavMeshAgent agent;
     private GameObject player;
     private Animator animator;
+    [SerializeField] private Enemy_Healthbar_Manager healthbar_manager;
 
     //STATS
     [SerializeField] private float attackRange;
     [SerializeField] private float visionRange;
-    [SerializeField] private int health;
+    [SerializeField] private int maxHealth;
+    private int health;
     [SerializeField] private float timeBetweenAttacks;
     [SerializeField] private int damage;
 
@@ -28,6 +30,11 @@ public class EnemyBehaviour : MonoBehaviour
         player = Level_Manager._LEVELMANAGER.player;
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
+
+        //seteamos vida y healthbar del enemigo
+        health = maxHealth;
+        healthbar_manager.SetMax(maxHealth);
+        healthbar_manager.SetValue(health);
     }
     private void Update()
     {
@@ -110,11 +117,13 @@ public class EnemyBehaviour : MonoBehaviour
         health -= damage;
         if (health <= 0)
         {
+            health = 0;
             animator.SetTrigger("die");
             isAlive = false;
             Destroy(agent);
             Destroy(GetComponent<CapsuleCollider>());
         }
+        healthbar_manager.SetValue(health);
     }
 
     //auxiliar para saber cuando acaba nuestra animacion de morir

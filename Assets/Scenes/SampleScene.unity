@@ -615,7 +615,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0.30215383, g: 0.44146296, b: 0.6603774, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -2467,21 +2467,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2291821195987910802, guid: 502c290bbb4b39d4f927c9e96a4ba993, type: 3}
-      propertyPath: damage
-      value: 10
+    - target: {fileID: 3707921945297935487, guid: 502c290bbb4b39d4f927c9e96a4ba993, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2291821195987910802, guid: 502c290bbb4b39d4f927c9e96a4ba993, type: 3}
-      propertyPath: attackRange
-      value: 1.6
+    - target: {fileID: 3707921945297935487, guid: 502c290bbb4b39d4f927c9e96a4ba993, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2291821195987910802, guid: 502c290bbb4b39d4f927c9e96a4ba993, type: 3}
-      propertyPath: visionRange
-      value: 7
+    - target: {fileID: 3707921945297935487, guid: 502c290bbb4b39d4f927c9e96a4ba993, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2291821195987910802, guid: 502c290bbb4b39d4f927c9e96a4ba993, type: 3}
-      propertyPath: timeBetweenAttacks
-      value: 0.5
+    - target: {fileID: 8407887659817908738, guid: 502c290bbb4b39d4f927c9e96a4ba993, type: 3}
+      propertyPath: m_Direction
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8837077429691206784, guid: 502c290bbb4b39d4f927c9e96a4ba993, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.001
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

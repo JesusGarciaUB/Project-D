@@ -21,8 +21,15 @@ public class PlayerAnimations : MonoBehaviour
 
     private void Update()
     {
-        animator.SetBool("isAttacking", player.isAttacking());
-        animator.SetBool("isMoving", player.isMoving());
+        if (cs.isAlive)
+        {
+            animator.SetBool("isAttacking", player.isAttacking());
+            animator.SetBool("isMoving", player.isMoving());
+        } else
+        {
+            animator.SetBool("isAttacking", false);
+        }
+
         if (!cs.isAlive && !triggeredDeath)
         {
             animator.SetTrigger("die");
