@@ -366,11 +366,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthbar_manager: {fileID: 5381250823440956701}
-  attackRange: 1.6
+  attackRange: 2
   visionRange: 7
   maxHealth: 30
   timeBetweenAttacks: 0.5
   damage: 10
+  GivenExperience: 65
 --- !u!95 &8321681299187216069
 Animator:
   serializedVersion: 5

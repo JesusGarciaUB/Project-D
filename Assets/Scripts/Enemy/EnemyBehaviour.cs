@@ -18,6 +18,7 @@ public class EnemyBehaviour : MonoBehaviour
     private int health;
     [SerializeField] private float timeBetweenAttacks;
     [SerializeField] private int damage;
+    [SerializeField] private int GivenExperience;
 
     //AUXILIARES
     private bool isAlive = true;
@@ -117,6 +118,7 @@ public class EnemyBehaviour : MonoBehaviour
         health -= damage;
         if (health <= 0)
         {
+            player.GetComponent<ExpSystem>().GainExperience(GivenExperience);
             health = 0;
             animator.SetTrigger("die");
             isAlive = false;

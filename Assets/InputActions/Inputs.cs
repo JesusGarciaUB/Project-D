@@ -44,6 +44,51 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Cancel"",
+                    ""type"": ""Button"",
+                    ""id"": ""c22bb5ab-4383-4aba-8ed9-65cb205f5a0f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press"",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Q"",
+                    ""type"": ""Button"",
+                    ""id"": ""dd2e19bb-11f6-4d76-9504-6b5716e5cb1a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press"",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""W"",
+                    ""type"": ""Button"",
+                    ""id"": ""896571b8-3359-44eb-bd66-b92665333716"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press"",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""E"",
+                    ""type"": ""Button"",
+                    ""id"": ""1820730c-a140-4abb-9870-5bb74fd9b18b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press"",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""R"",
+                    ""type"": ""Button"",
+                    ""id"": ""d7e3d0cf-9f84-439d-ab73-ace9a497b447"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press"",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -68,6 +113,61 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
                     ""action"": ""MousePosition"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""316c4860-3df3-426f-aa9f-5ee09a22a39c"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Cancel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cc72399b-63f5-4a80-8f92-e0a67f69e668"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Q"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""84c2a064-0bb9-4ea9-a3df-229edbef3a65"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""W"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8245c2bc-d2a7-44d6-b9b5-0887bf3cd640"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""E"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""228194ee-d6ea-4b0f-9ae4-6c9f45ee3798"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""R"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -78,6 +178,11 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
         m_Character = asset.FindActionMap("Character", throwIfNotFound: true);
         m_Character_Move = m_Character.FindAction("Move", throwIfNotFound: true);
         m_Character_MousePosition = m_Character.FindAction("MousePosition", throwIfNotFound: true);
+        m_Character_Cancel = m_Character.FindAction("Cancel", throwIfNotFound: true);
+        m_Character_Q = m_Character.FindAction("Q", throwIfNotFound: true);
+        m_Character_W = m_Character.FindAction("W", throwIfNotFound: true);
+        m_Character_E = m_Character.FindAction("E", throwIfNotFound: true);
+        m_Character_R = m_Character.FindAction("R", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -141,12 +246,22 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
     private List<ICharacterActions> m_CharacterActionsCallbackInterfaces = new List<ICharacterActions>();
     private readonly InputAction m_Character_Move;
     private readonly InputAction m_Character_MousePosition;
+    private readonly InputAction m_Character_Cancel;
+    private readonly InputAction m_Character_Q;
+    private readonly InputAction m_Character_W;
+    private readonly InputAction m_Character_E;
+    private readonly InputAction m_Character_R;
     public struct CharacterActions
     {
         private @Inputs m_Wrapper;
         public CharacterActions(@Inputs wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Character_Move;
         public InputAction @MousePosition => m_Wrapper.m_Character_MousePosition;
+        public InputAction @Cancel => m_Wrapper.m_Character_Cancel;
+        public InputAction @Q => m_Wrapper.m_Character_Q;
+        public InputAction @W => m_Wrapper.m_Character_W;
+        public InputAction @E => m_Wrapper.m_Character_E;
+        public InputAction @R => m_Wrapper.m_Character_R;
         public InputActionMap Get() { return m_Wrapper.m_Character; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -162,6 +277,21 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
             @MousePosition.started += instance.OnMousePosition;
             @MousePosition.performed += instance.OnMousePosition;
             @MousePosition.canceled += instance.OnMousePosition;
+            @Cancel.started += instance.OnCancel;
+            @Cancel.performed += instance.OnCancel;
+            @Cancel.canceled += instance.OnCancel;
+            @Q.started += instance.OnQ;
+            @Q.performed += instance.OnQ;
+            @Q.canceled += instance.OnQ;
+            @W.started += instance.OnW;
+            @W.performed += instance.OnW;
+            @W.canceled += instance.OnW;
+            @E.started += instance.OnE;
+            @E.performed += instance.OnE;
+            @E.canceled += instance.OnE;
+            @R.started += instance.OnR;
+            @R.performed += instance.OnR;
+            @R.canceled += instance.OnR;
         }
 
         private void UnregisterCallbacks(ICharacterActions instance)
@@ -172,6 +302,21 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
             @MousePosition.started -= instance.OnMousePosition;
             @MousePosition.performed -= instance.OnMousePosition;
             @MousePosition.canceled -= instance.OnMousePosition;
+            @Cancel.started -= instance.OnCancel;
+            @Cancel.performed -= instance.OnCancel;
+            @Cancel.canceled -= instance.OnCancel;
+            @Q.started -= instance.OnQ;
+            @Q.performed -= instance.OnQ;
+            @Q.canceled -= instance.OnQ;
+            @W.started -= instance.OnW;
+            @W.performed -= instance.OnW;
+            @W.canceled -= instance.OnW;
+            @E.started -= instance.OnE;
+            @E.performed -= instance.OnE;
+            @E.canceled -= instance.OnE;
+            @R.started -= instance.OnR;
+            @R.performed -= instance.OnR;
+            @R.canceled -= instance.OnR;
         }
 
         public void RemoveCallbacks(ICharacterActions instance)
@@ -193,5 +338,10 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
     {
         void OnMove(InputAction.CallbackContext context);
         void OnMousePosition(InputAction.CallbackContext context);
+        void OnCancel(InputAction.CallbackContext context);
+        void OnQ(InputAction.CallbackContext context);
+        void OnW(InputAction.CallbackContext context);
+        void OnE(InputAction.CallbackContext context);
+        void OnR(InputAction.CallbackContext context);
     }
 }
