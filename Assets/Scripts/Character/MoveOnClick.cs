@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.AnimatedValues;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem;
@@ -25,11 +26,20 @@ public class MoveOnClick : MonoBehaviour
     private Vector3 hitGround;
     private Transform hitEnemy;
 
+    //HABILIDADES
+    [SerializeField] private GameObject QAbility;
+    [SerializeField] private GameObject WAbility;
+    [SerializeField] private GameObject EAbility;
+    [SerializeField] private GameObject RAbility;
+    [SerializeField] private bool[] isActivatable;
+    [SerializeField] private bool[] alwaysOn;
+
     private void Awake()
     {
         myAgent = GetComponent<NavMeshAgent>();
         destination = myAgent.transform.position;
         combatSystem = GetComponent<CombatSystem>();
+        InstanceActivatables();
     }
     private void Update()
     {
@@ -38,6 +48,22 @@ public class MoveOnClick : MonoBehaviour
         {
             myAgent.SetDestination(myAgent.transform.position);
             destination = myAgent.transform.position;
+        }
+
+        //botones habilidades
+        if (combatSystem.isAlive)
+        {
+            if (Input_Manager._INPUT_MANAGER.GetQPressed() && QAbility != null)
+            {
+                if (isActivatable[0] && !alwaysOn[0]) QAbility.SetActive(!QAbility.activeSelf);
+                else if (isActivatable[0] && alwaysOn[0]) QAbility.GetComponent<Base_ability>().Performed();
+            }
+
+            if (Input_Manager._INPUT_MANAGER.GetWPressed() && WAbility != null)
+            {
+                if (isActivatable[1] && !alwaysOn[1]) WAbility.SetActive(!WAbility.activeSelf);
+                else if (isActivatable[1] && alwaysOn[1]) WAbility.GetComponent<Base_ability>().Performed();
+            }
         }
 
         //Setup por frame del raycast
@@ -107,5 +133,33 @@ public class MoveOnClick : MonoBehaviour
     public bool isAttacking()
     {
         return attacking;
+    }
+
+    //si las habilidades son activas, las instanciamos para que solo haya 1 en escena
+    private void InstanceActivatables()
+    {
+        if (isActivatable[0])
+        {
+            QAbility = Instantiate(QAbility);
+            if (!alwaysOn[0]) QAbility.SetActive(false);
+        }
+
+        if (isActivatable[1])
+        {
+            WAbility = Instantiate(WAbility);
+            if (!alwaysOn[1]) WAbility.SetActive(false);
+        }
+
+        if (isActivatable[2])
+        {
+            EAbility = Instantiate(EAbility);
+            if (!alwaysOn[2]) EAbility.SetActive(false);
+        }
+
+        if (isActivatable[3])
+        {
+            RAbility = Instantiate(RAbility);
+            if (!alwaysOn[3]) RAbility.SetActive(false);
+        }
     }
 }

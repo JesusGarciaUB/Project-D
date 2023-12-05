@@ -368,9 +368,9 @@ MonoBehaviour:
   healthbar_manager: {fileID: 5381250823440956701}
   attackRange: 2
   visionRange: 7
-  maxHealth: 30
+  maxHealth: 300
   timeBetweenAttacks: 0.5
-  damage: 10
+  damage: 80
   GivenExperience: 65
 --- !u!95 &8321681299187216069
 Animator:
@@ -408,7 +408,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2

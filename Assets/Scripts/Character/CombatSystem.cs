@@ -19,6 +19,10 @@ public class CombatSystem : MonoBehaviour
     [SerializeField] private float basicAttackRange;
     [SerializeField] private int basicAttackDamage;
     private int SkillTreePoints = 0;
+    [SerializeField] private float timeBetweenHealthRegen;
+    [SerializeField] private int healthRegenTick;
+    [SerializeField] private float timeBetweenManaRegen;
+    [SerializeField] private int manaRegenTick;
 
     //UI HEALTH AND MANA
     [SerializeField] private Slider healthSlider;
@@ -31,10 +35,30 @@ public class CombatSystem : MonoBehaviour
 
     //AUXILIARES
     public bool isAlive = true;
+    private float healthRegenCounter = 0f;
+    private float manaRegenCounter = 0f;
 
     private void Awake()
     {
         SetUpHealthAndMana();
+    }
+
+    private void Update()
+    {
+        healthRegenCounter += Time.deltaTime;
+        manaRegenCounter += Time.deltaTime;
+
+        if (timeBetweenHealthRegen <= healthRegenCounter)
+        {
+            healthRegenCounter = 0f;
+            HealDamage(healthRegenTick);
+        }
+
+        if (timeBetweenManaRegen <= manaRegenCounter)
+        {
+            manaRegenCounter = 0f;
+            ReceiveMana(manaRegenTick);
+        }
     }
 
     //setup inicial y para cuando subimos de nivel
@@ -73,7 +97,39 @@ public class CombatSystem : MonoBehaviour
         healthText.text = health.ToString();
         healthSlider.value = health;
     }
-    
+
+    //nos curamos
+    public void HealDamage(int damage)
+    {
+        if (isAlive)
+        {
+            health += damage;
+            if (health > maxHealth) health = maxHealth;
+            healthText.text = health.ToString();
+            healthSlider.value = health;
+        }
+    }
+
+    //gastamos mana
+    public void WasteMana(int cost)
+    {
+        mana -= cost;
+        manaText.text = mana.ToString();
+        manaSlider.value = mana;
+    }
+
+    //recuperamos mana
+    public void ReceiveMana(int cost)
+    {
+        if (isAlive)
+        {
+            mana += cost;
+            if (mana > maxMana) mana = maxMana;
+            manaText.text = mana.ToString();
+            manaSlider.value = mana;
+        }
+    }
+
     //funcion llamada el mismo frame al morir
     private void Die()
     {
@@ -96,5 +152,10 @@ public class CombatSystem : MonoBehaviour
     {
         yield return new WaitForSeconds(6);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public bool WillDieNextFrame(int damage)
+    {
+        return health - damage <= 0;
     }
 }

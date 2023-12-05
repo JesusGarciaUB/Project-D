@@ -140,4 +140,6 @@ public class EnemyBehaviour : MonoBehaviour
         yield return new WaitForSeconds(timeBetweenAttacks);
         canAttack = true;
     }
+
+    public bool GetisAlive() {  return this.isAlive; }
 }
