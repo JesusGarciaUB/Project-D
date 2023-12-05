@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
+using Unity.VisualScripting;
 
 public class CombatSystem : MonoBehaviour
 {
@@ -37,6 +38,7 @@ public class CombatSystem : MonoBehaviour
     public bool isAlive = true;
     private float healthRegenCounter = 0f;
     private float manaRegenCounter = 0f;
+    private int toAddThisFrame = 0;
 
     private void Awake()
     {
@@ -59,6 +61,21 @@ public class CombatSystem : MonoBehaviour
             manaRegenCounter = 0f;
             ReceiveMana(manaRegenTick);
         }
+
+        NormalizeHealth();
+    }
+
+    //Modificamos la vida 1 vez por frame
+    private void NormalizeHealth()
+    {
+        health += toAddThisFrame;
+        if (health >= maxHealth) health = maxHealth;
+        if (health <= 0) Die();
+
+        healthText.text = health.ToString();
+        healthSlider.value = health;
+
+        toAddThisFrame = 0;
     }
 
     //setup inicial y para cuando subimos de nivel
@@ -92,10 +109,7 @@ public class CombatSystem : MonoBehaviour
     //recivimos daño
     public void ReceiveDamage(int damage)
     {
-        health -= damage;
-        if (health <= 0) Die();
-        healthText.text = health.ToString();
-        healthSlider.value = health;
+        toAddThisFrame -= damage;
     }
 
     //nos curamos
@@ -103,10 +117,7 @@ public class CombatSystem : MonoBehaviour
     {
         if (isAlive)
         {
-            health += damage;
-            if (health > maxHealth) health = maxHealth;
-            healthText.text = health.ToString();
-            healthSlider.value = health;
+            toAddThisFrame += damage;
         }
     }
 
@@ -157,5 +168,15 @@ public class CombatSystem : MonoBehaviour
     public bool WillDieNextFrame(int damage)
     {
         return health - damage <= 0;
+    }
+
+    public void AddHealthRegen(int val)
+    {
+        healthRegenTick += val;
+    }
+
+    public void SubHealthRegen(int val)
+    {
+        healthRegenTick -= val;
     }
 }

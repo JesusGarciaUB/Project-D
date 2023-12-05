@@ -7,7 +7,6 @@ public class Realm_of_Poison : Base_ability
     //STATS
     private List<GameObject> enemies = new List<GameObject>();
     private float tickDamageCounter = 0f;
-    private float tickCostCounter = 0f;
     [SerializeField] private int damage;
     [SerializeField] private float timeBetweenTicks;
     [SerializeField] private int cost;
@@ -20,25 +19,12 @@ public class Realm_of_Poison : Base_ability
 
     private void Update()
     {
-        tickCostCounter += Time.deltaTime;
         tickDamageCounter += Time.deltaTime;
 
         if (tickDamageCounter >= timeBetweenTicks )
         {
             tickDamageCounter = 0f;
             DealDamage();
-        }
-
-        if (tickCostCounter >= timeBetweenCost)
-        {
-            if (!combatSystem.WillDieNextFrame(cost))
-            {
-                tickCostCounter = 0f;
-                combatSystem.ReceiveDamage(cost);
-            } else
-            {
-                gameObject.SetActive(false);
-            }
         }
     }
 
@@ -80,5 +66,15 @@ public class Realm_of_Poison : Base_ability
     {
         transform.position = Level_Manager._LEVELMANAGER.player.transform.position;
     }
-    
+
+    private void OnEnable()
+    {
+        combatSystem.SubHealthRegen(cost);
+    }
+
+    private void OnDisable()
+    {
+        combatSystem.AddHealthRegen(cost);
+    }
+
 }
