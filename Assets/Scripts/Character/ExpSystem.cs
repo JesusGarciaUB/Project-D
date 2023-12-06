@@ -10,7 +10,7 @@ public class ExpSystem : MonoBehaviour
     private int currentLevel = 1;
     [SerializeField] private int maxLevel;
     private int currentExp = 0;
-    private int ExpToLvlUp = 100;
+    private int ExpToLvlUp = 10;
 
     //COMPONENTES
     private CombatSystem combatSystem;
@@ -39,7 +39,7 @@ public class ExpSystem : MonoBehaviour
     {
         currentExp = lastExpGained - (ExpToLvlUp - currentExp);
         currentLevel++;
-        ExpToLvlUp = (int)((float)ExpToLvlUp * 1.6f);
+        ExpToLvlUp = (int)(4 * (Mathf.Pow(currentLevel, 3)) * 0.2f) + 10;
         combatSystem.LevelUp();
 
         if (currentLevel == maxLevel)

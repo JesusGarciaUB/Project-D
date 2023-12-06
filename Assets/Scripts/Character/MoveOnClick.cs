@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.AnimatedValues;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem;
@@ -63,6 +62,12 @@ public class MoveOnClick : MonoBehaviour
             {
                 if (isActivatable[1] && !alwaysOn[1]) WAbility.SetActive(!WAbility.activeSelf);
                 else if (isActivatable[1] && alwaysOn[1]) WAbility.GetComponent<Base_ability>().Performed();
+            }
+
+            if (Input_Manager._INPUT_MANAGER.GetEPressed() && EAbility != null)
+            {
+                if (isActivatable[2] && !alwaysOn[2]) EAbility.SetActive(!EAbility.activeSelf);
+                else if (isActivatable[2] && alwaysOn[2]) EAbility.GetComponent<Base_ability>().Performed();
             }
         }
 

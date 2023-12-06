@@ -26,6 +26,11 @@ public class Realm_of_Poison : Base_ability
             tickDamageCounter = 0f;
             DealDamage();
         }
+
+        if (combatSystem.WillDieNextFrame(cost))
+        {
+            gameObject.SetActive(false);
+        }
     }
 
     //funcion para realizar daño a todos los enemigos de la lista si estan vivos

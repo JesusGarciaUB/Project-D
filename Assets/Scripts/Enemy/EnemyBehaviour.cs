@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using TMPro;
 
 public class EnemyBehaviour : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class EnemyBehaviour : MonoBehaviour
     private GameObject player;
     private Animator animator;
     [SerializeField] private Enemy_Healthbar_Manager healthbar_manager;
+    [SerializeField] private TextMeshProUGUI levelText;
 
     //STATS
     [SerializeField] private float attackRange;
@@ -19,6 +21,7 @@ public class EnemyBehaviour : MonoBehaviour
     [SerializeField] private float timeBetweenAttacks;
     [SerializeField] private int damage;
     [SerializeField] private int GivenExperience;
+    [SerializeField] private int level;
 
     //AUXILIARES
     private bool isAlive = true;
@@ -28,6 +31,7 @@ public class EnemyBehaviour : MonoBehaviour
 
     private void Awake()
     {
+        levelText.text = level.ToString();
         player = Level_Manager._LEVELMANAGER.player;
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
