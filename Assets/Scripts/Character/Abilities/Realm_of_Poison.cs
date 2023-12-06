@@ -82,4 +82,9 @@ public class Realm_of_Poison : Base_ability
         combatSystem.AddHealthRegen(cost);
     }
 
+    public override void LevelUpAbility()
+    {
+        abilityLevel++;
+        damage += 5;
+    }
 }

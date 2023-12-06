@@ -1191,7 +1191,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &565822209
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1232,7 +1232,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &589660511
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1964,7 +1964,7 @@ RectTransform:
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0.65, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -2040,7 +2040,7 @@ RectTransform:
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -2175,7 +2175,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1034779998
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2189,6 +2189,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1847047408}
+  - {fileID: 1191064193}
   m_Father: {fileID: 1910161012}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2269,7 +2270,7 @@ RectTransform:
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -2310,6 +2311,166 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1086808898}
+  m_CullTransparentMesh: 1
+--- !u!1 &1191064192
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1191064193}
+  - component: {fileID: 1191064197}
+  - component: {fileID: 1191064196}
+  - component: {fileID: 1191064195}
+  - component: {fileID: 1191064194}
+  m_Layer: 5
+  m_Name: Trap
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1191064193
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1191064192}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1034779998}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 281, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1191064194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1191064192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9ebfc9ecaf6ecc4093dc5bfade9c360, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  abilityAttached: {fileID: 2628713508843277422, guid: b230ed146cc62ef4898a1643e76e87c4, type: 3}
+  maxLevel: 5
+  currentLevel: 0
+  isActivatable: 1
+  alwaysOn: 1
+  canBeLearned: 0
+  text: Throws a trap on the ground that explodes when an enemy walks over. Level
+    reduces cooldown.
+  nextSkill: []
+--- !u!114 &1191064195
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1191064192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1191064194}
+          m_TargetAssemblyTypeName: OnHoverBehaviour, Assembly-CSharp
+          m_MethodName: MouseEnter
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1191064194}
+          m_TargetAssemblyTypeName: OnHoverBehaviour, Assembly-CSharp
+          m_MethodName: MouseExit
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 4
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1191064194}
+          m_TargetAssemblyTypeName: OnHoverBehaviour, Assembly-CSharp
+          m_MethodName: MouseClick
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!114 &1191064196
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1191064192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 3d241d975dd425b41808e25818619fdc, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 1
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1191064197
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1191064192}
   m_CullTransparentMesh: 1
 --- !u!1 &1278862245
 GameObject:
@@ -2729,26 +2890,34 @@ PrefabInstance:
     - target: {fileID: 2666376833757091989, guid: 29e930fb6fef54b45ae74883dedde520, type: 3}
       propertyPath: EAbility
       value: 
-      objectReference: {fileID: 2628713508843277422, guid: b230ed146cc62ef4898a1643e76e87c4, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 2666376833757091989, guid: 29e930fb6fef54b45ae74883dedde520, type: 3}
       propertyPath: QAbility
       value: 
-      objectReference: {fileID: 3943388736152554803, guid: 65a5750ee7bd5b54aa016ca2242749f3, type: 3}
+      objectReference: {fileID: 0}
+    - target: {fileID: 2666376833757091989, guid: 29e930fb6fef54b45ae74883dedde520, type: 3}
+      propertyPath: RAbility
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 2666376833757091989, guid: 29e930fb6fef54b45ae74883dedde520, type: 3}
       propertyPath: WAbility
       value: 
-      objectReference: {fileID: 2813036685725362921, guid: 9e50c383af4173747a315278fa8ce676, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 2666376833757091989, guid: 29e930fb6fef54b45ae74883dedde520, type: 3}
       propertyPath: alwaysOn.Array.size
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2666376833757091989, guid: 29e930fb6fef54b45ae74883dedde520, type: 3}
       propertyPath: alwaysOn.Array.data[1]
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2666376833757091989, guid: 29e930fb6fef54b45ae74883dedde520, type: 3}
       propertyPath: alwaysOn.Array.data[2]
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2666376833757091989, guid: 29e930fb6fef54b45ae74883dedde520, type: 3}
+      propertyPath: alwaysOn.Array.data[3]
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2666376833757091989, guid: 29e930fb6fef54b45ae74883dedde520, type: 3}
       propertyPath: isActivatable.Array.size
@@ -2756,15 +2925,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2666376833757091989, guid: 29e930fb6fef54b45ae74883dedde520, type: 3}
       propertyPath: isActivatable.Array.data[0]
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2666376833757091989, guid: 29e930fb6fef54b45ae74883dedde520, type: 3}
       propertyPath: isActivatable.Array.data[1]
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2666376833757091989, guid: 29e930fb6fef54b45ae74883dedde520, type: 3}
       propertyPath: isActivatable.Array.data[2]
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2666376833757091989, guid: 29e930fb6fef54b45ae74883dedde520, type: 3}
+      propertyPath: isActivatable.Array.data[3]
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5801280585506196127, guid: 29e930fb6fef54b45ae74883dedde520, type: 3}
       propertyPath: maxMana
@@ -2802,6 +2975,10 @@ PrefabInstance:
       propertyPath: maxHealthText
       value: 
       objectReference: {fileID: 2008309424}
+    - target: {fileID: 5801280585506196127, guid: 29e930fb6fef54b45ae74883dedde520, type: 3}
+      propertyPath: SkillTreePoints
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5801280585506196127, guid: 29e930fb6fef54b45ae74883dedde520, type: 3}
       propertyPath: healthRegenTick
       value: 1
@@ -3288,7 +3465,7 @@ GameObject:
   - component: {fileID: 1847047413}
   - component: {fileID: 1847047414}
   m_Layer: 5
-  m_Name: Skill
+  m_Name: Realm_Of_Poisons
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3397,6 +3574,22 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+  - eventID: 4
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1847047414}
+          m_TargetAssemblyTypeName: OnHoverBehaviour, Assembly-CSharp
+          m_MethodName: MouseClick
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!114 &1847047414
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3409,6 +3602,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9ebfc9ecaf6ecc4093dc5bfade9c360, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  abilityAttached: {fileID: 3943388736152554803, guid: 65a5750ee7bd5b54aa016ca2242749f3, type: 3}
+  maxLevel: 5
+  currentLevel: 0
+  isActivatable: 1
+  alwaysOn: 0
+  canBeLearned: 1
+  text: Engulfs you in magical posion that rapidly damages you and nearby enemies.
+    The effect ends when you have 1 life remaining.
+  nextSkill:
+  - {fileID: 1191064194}
 --- !u!1 &1887063963
 GameObject:
   m_ObjectHideFlags: 0
@@ -3425,7 +3628,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1887063964
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3897,7 +4100,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1980732001
 RectTransform:
   m_ObjectHideFlags: 0

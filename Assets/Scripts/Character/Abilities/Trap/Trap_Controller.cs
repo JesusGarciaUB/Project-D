@@ -38,4 +38,10 @@ public class Trap_Controller : Base_ability
     {
         performedThisFrame = true;
     }
+
+    public override void LevelUpAbility()
+    {
+        abilityLevel++;
+        cooldown -= 0.2f;
+    }
 }

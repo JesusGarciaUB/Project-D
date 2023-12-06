@@ -367,7 +367,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthbar_manager: {fileID: 5381250823440956701}
   levelText: {fileID: 4603066422192349825}
-  attackRange: 2
+  attackRange: 1.6
   visionRange: 7
   maxHealth: 300
   timeBetweenAttacks: 0.5

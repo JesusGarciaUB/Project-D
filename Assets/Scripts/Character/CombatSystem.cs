@@ -19,7 +19,7 @@ public class CombatSystem : MonoBehaviour
     private int mana;
     [SerializeField] private float basicAttackRange;
     [SerializeField] private int basicAttackDamage;
-    private int SkillTreePoints = 0;
+    public int SkillTreePoints;
     [SerializeField] private float timeBetweenHealthRegen;
     [SerializeField] private int healthRegenTick;
     [SerializeField] private float timeBetweenManaRegen;

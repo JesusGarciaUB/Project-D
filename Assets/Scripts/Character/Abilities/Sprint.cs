@@ -51,4 +51,10 @@ public class Sprint : Base_ability
     {
         performedThisFrame = true;
     }
+
+    public override void LevelUpAbility()
+    {
+        abilityLevel++;
+        duration += 0.2f;
+    }
 }

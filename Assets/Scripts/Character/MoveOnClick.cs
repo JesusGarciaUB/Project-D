@@ -26,19 +26,16 @@ public class MoveOnClick : MonoBehaviour
     private Transform hitEnemy;
 
     //HABILIDADES
-    [SerializeField] private GameObject QAbility;
-    [SerializeField] private GameObject WAbility;
-    [SerializeField] private GameObject EAbility;
-    [SerializeField] private GameObject RAbility;
-    [SerializeField] private bool[] isActivatable;
-    [SerializeField] private bool[] alwaysOn;
+    [SerializeField] private List<GameObject> abilities = new List<GameObject>();
+    [SerializeField] private bool[] isActivatable = { false, false, false, false };
+    [SerializeField] private bool[] alwaysOn = { false, false, false, false };
+    private int nextFreeSlot = 0;
 
     private void Awake()
     {
         myAgent = GetComponent<NavMeshAgent>();
         destination = myAgent.transform.position;
         combatSystem = GetComponent<CombatSystem>();
-        InstanceActivatables();
     }
     private void Update()
     {
@@ -52,22 +49,40 @@ public class MoveOnClick : MonoBehaviour
         //botones habilidades
         if (combatSystem.isAlive)
         {
-            if (Input_Manager._INPUT_MANAGER.GetQPressed() && QAbility != null)
+            if (abilities.Count > 0)
             {
-                if (isActivatable[0] && !alwaysOn[0]) QAbility.SetActive(!QAbility.activeSelf);
-                else if (isActivatable[0] && alwaysOn[0]) QAbility.GetComponent<Base_ability>().Performed();
+                if (Input_Manager._INPUT_MANAGER.GetQPressed() && abilities[0] != null)
+                {
+                    if (isActivatable[0] && !alwaysOn[0]) abilities[0].SetActive(!abilities[0].activeSelf);
+                    else if (isActivatable[0] && alwaysOn[0]) abilities[0].GetComponent<Base_ability>().Performed();
+                }
             }
 
-            if (Input_Manager._INPUT_MANAGER.GetWPressed() && WAbility != null)
+            if (abilities.Count > 1)
             {
-                if (isActivatable[1] && !alwaysOn[1]) WAbility.SetActive(!WAbility.activeSelf);
-                else if (isActivatable[1] && alwaysOn[1]) WAbility.GetComponent<Base_ability>().Performed();
+                if (Input_Manager._INPUT_MANAGER.GetWPressed() && abilities[1] != null)
+                {
+                    if (isActivatable[1] && !alwaysOn[1]) abilities[1].SetActive(!abilities[1].activeSelf);
+                    else if (isActivatable[1] && alwaysOn[1]) abilities[1].GetComponent<Base_ability>().Performed();
+                }
             }
 
-            if (Input_Manager._INPUT_MANAGER.GetEPressed() && EAbility != null)
+            if (abilities.Count > 2)
             {
-                if (isActivatable[2] && !alwaysOn[2]) EAbility.SetActive(!EAbility.activeSelf);
-                else if (isActivatable[2] && alwaysOn[2]) EAbility.GetComponent<Base_ability>().Performed();
+                if (Input_Manager._INPUT_MANAGER.GetEPressed() && abilities[2] != null)
+                {
+                    if (isActivatable[2] && !alwaysOn[2]) abilities[2].SetActive(!abilities[2].activeSelf);
+                    else if (isActivatable[2] && alwaysOn[2]) abilities[2].GetComponent<Base_ability>().Performed();
+                }
+            }
+
+            if (abilities.Count > 3)
+            {
+                if (Input_Manager._INPUT_MANAGER.GetRPressed() && abilities[3] != null)
+                {
+                    if (isActivatable[3] && !alwaysOn[3]) abilities[3].SetActive(!abilities[3].activeSelf);
+                    else if (isActivatable[3] && alwaysOn[3]) abilities[3].GetComponent<Base_ability>().Performed();
+                }
             }
         }
 
@@ -141,30 +156,28 @@ public class MoveOnClick : MonoBehaviour
     }
 
     //si las habilidades son activas, las instanciamos para que solo haya 1 en escena
-    private void InstanceActivatables()
+    public void InstanceActivatables(int pos)
     {
-        if (isActivatable[0])
+        if (isActivatable[pos])
         {
-            QAbility = Instantiate(QAbility);
-            if (!alwaysOn[0]) QAbility.SetActive(false);
+            abilities[pos] = Instantiate(abilities[pos]);
+            if (!alwaysOn[pos]) abilities[pos].SetActive(false);
         }
+    }
 
-        if (isActivatable[1])
-        {
-            WAbility = Instantiate(WAbility);
-            if (!alwaysOn[1]) WAbility.SetActive(false);
-        }
+    public int GetNextFreeSlot() { return this.nextFreeSlot; }
+    public void UseNextFreeSlot(int pos, GameObject ability, bool activatable, bool aOn) 
+    {
+        abilities.Add(ability);
+        isActivatable[pos] = activatable;
+        alwaysOn[pos] = aOn;
 
-        if (isActivatable[2])
-        {
-            EAbility = Instantiate(EAbility);
-            if (!alwaysOn[2]) EAbility.SetActive(false);
-        }
+        InstanceActivatables(pos);
+        nextFreeSlot++;
+    }
 
-        if (isActivatable[3])
-        {
-            RAbility = Instantiate(RAbility);
-            if (!alwaysOn[3]) RAbility.SetActive(false);
-        }
+    public void LevelUpAbility(int pos)
+    {
+        abilities[pos].GetComponent<Base_ability>().LevelUpAbility();
     }
 }
