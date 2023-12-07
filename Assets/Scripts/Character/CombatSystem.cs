@@ -179,4 +179,9 @@ public class CombatSystem : MonoBehaviour
     {
         healthRegenTick -= val;
     }
+
+    public void AddMaxHealth(int val)
+    {
+        maxHealth += val;
+    }
 }

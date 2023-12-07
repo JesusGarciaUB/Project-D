@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class OnHoverBehaviour : MonoBehaviour
 {
@@ -19,9 +20,9 @@ public class OnHoverBehaviour : MonoBehaviour
     //ONHOVERTEXTBOX
     private GameObject textBox;
     [SerializeField] private string text;
-    [SerializeField] private List<OnHoverBehaviour> nextSkill;
+    [SerializeField] protected List<OnHoverBehaviour> nextSkill;
 
-    private CombatSystem combatSystem;
+    protected CombatSystem combatSystem;
     private MoveOnClick player;
 
     private void Awake()
@@ -51,14 +52,16 @@ public class OnHoverBehaviour : MonoBehaviour
             {
                 foreach (OnHoverBehaviour skill in nextSkill)
                 {
-                    skill.canBeLearned = true;
+                    if (!skill.canBeLearned)
+                    {
+                        skill.canBeLearned = true;
+                        skill.GetComponent<Image>().color = Color.white;
+                    }
                 }
-                Debug.Log("Fist iteration");
                 position = player.GetNextFreeSlot();
                 player.UseNextFreeSlot(position, abilityAttached, isActivatable, alwaysOn);
             } else
             {
-                Debug.Log("LevelUp");
                 player.LevelUpAbility(position);
             }
             currentLevel++;
