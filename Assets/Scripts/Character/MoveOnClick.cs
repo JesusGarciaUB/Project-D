@@ -162,6 +162,7 @@ public class MoveOnClick : MonoBehaviour
         {
             abilities[pos] = Instantiate(abilities[pos]);
             if (!alwaysOn[pos]) abilities[pos].SetActive(false);
+            if (pos == 0) Level_Manager._LEVELMANAGER.main_ability = abilities[pos];
         }
     }
 

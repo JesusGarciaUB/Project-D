@@ -8,6 +8,9 @@ public class Level_Manager : MonoBehaviour
     [SerializeField] public GameObject player;
     [SerializeField] public GameObject onHoverObject;
 
+    //Main ability
+    public GameObject main_ability;
+
     public static Level_Manager _LEVELMANAGER;
 
     private void Awake()

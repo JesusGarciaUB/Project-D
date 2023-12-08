@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 using Unity.VisualScripting;
+using UnityEngine.AI;
 
 public class CombatSystem : MonoBehaviour
 {
@@ -183,5 +184,11 @@ public class CombatSystem : MonoBehaviour
     public void AddMaxHealth(int val)
     {
         maxHealth += val;
+        maxHealthText.text = maxHealth.ToString();
+    }
+
+    public void AddSpeed(float val)
+    {
+        GetComponent<NavMeshAgent>().speed += val;
     }
 }
