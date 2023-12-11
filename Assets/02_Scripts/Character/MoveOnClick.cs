@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem;
+using TMPro;
 
 public class MoveOnClick : MonoBehaviour
 {
@@ -35,6 +36,8 @@ public class MoveOnClick : MonoBehaviour
     //SKILLTREE
     [SerializeField] private GameObject skilltree;
 
+    //ICONS
+    [SerializeField] private GameObject[] quickAccessBar;
     private void Awake()
     {
         myAgent = GetComponent<NavMeshAgent>();
@@ -181,7 +184,7 @@ public class MoveOnClick : MonoBehaviour
     }
 
     public int GetNextFreeSlot() { return this.nextFreeSlot; }
-    public void UseNextFreeSlot(int pos, GameObject ability, bool activatable, bool aOn) 
+    public void UseNextFreeSlot(int pos, GameObject ability, bool activatable, bool aOn, Sprite icon) 
     {
         abilities.Add(ability);
         isActivatable[pos] = activatable;
@@ -189,6 +192,8 @@ public class MoveOnClick : MonoBehaviour
 
         InstanceActivatables(pos);
         nextFreeSlot++;
+
+        abilities[pos].GetComponent<Base_ability>().SetUI(icon, quickAccessBar[pos].transform.GetChild(3).GetComponent<TextMeshProUGUI>(), quickAccessBar[pos].transform.GetChild(0).gameObject, quickAccessBar[pos].transform.GetChild(2).gameObject);
     }
 
     public void LevelUpAbility(int pos)

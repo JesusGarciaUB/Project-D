@@ -19,6 +19,7 @@ public class Realm_of_Poison : Base_ability
 
     private void Update()
     {
+        PurgeList();
         tickDamageCounter += Time.deltaTime;
 
         if (tickDamageCounter >= timeBetweenTicks )
@@ -30,6 +31,22 @@ public class Realm_of_Poison : Base_ability
         if (combatSystem.WillDieNextFrame(cost))
         {
             gameObject.SetActive(false);
+        }
+    }
+
+    private void PurgeList()
+    {
+        List<int> toremove = new List<int>();
+        int count = 0;
+        foreach (GameObject enemy in enemies)
+        {
+            if (!enemy.GetComponent<EnemyBehaviour>().GetisAlive()) toremove.Add(count);
+            count++;
+        }
+
+        for (int x = toremove.Count; x > 0; x--)
+        {
+            enemies.Remove(enemies[toremove[x - 1]]);
         }
     }
 

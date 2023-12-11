@@ -10,11 +10,15 @@ public class OnHoverSmall_HealthRegen : OnHoverBehaviour
 
     new public void MouseClick()
     {
-        if (canBeLearned && !learned)
+        if (canBeLearned && !learned && combatSystem.SkillTreePoints > 0)
         {
+            transform.GetChild(0).gameObject.SetActive(true);
             combatSystem.AddHealthRegen(extraRegen);
             canBeLearned = false;
             learned = true;
+
+            combatSystem.SkillTreePoints--;
+            Level_Manager._LEVELMANAGER.skillpointsText.text = combatSystem.SkillTreePoints.ToString();
 
             foreach (OnHoverBehaviour skill in nextSkill)
             {

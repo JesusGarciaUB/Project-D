@@ -111,6 +111,7 @@ public class CombatSystem : MonoBehaviour
     public void ReceiveDamage(int damage)
     {
         toAddThisFrame -= damage;
+        Camera.main.GetComponent<CameraShake>().timeShake = 0.2f;
     }
 
     //nos curamos
@@ -157,6 +158,7 @@ public class CombatSystem : MonoBehaviour
         maxMana = (int)(maxMana * 1.2f);
         SkillTreePoints++;
         SetUpHealthAndMana();
+        Level_Manager._LEVELMANAGER.skillpointsText.text = SkillTreePoints.ToString();
     }
 
     //TESTING ONLY

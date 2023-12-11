@@ -12,6 +12,7 @@ public class OnHoverBehaviour : MonoBehaviour
     [SerializeField] private int currentLevel = 0;
     [SerializeField] private bool isActivatable;
     [SerializeField] private bool alwaysOn;
+    [SerializeField] private Sprite icon;
 
     //AUXILIARES
     public bool canBeLearned;
@@ -20,6 +21,7 @@ public class OnHoverBehaviour : MonoBehaviour
     //ONHOVERTEXTBOX
     private GameObject textBox;
     [SerializeField] private string text;
+    [SerializeField] private string pretext;
     [SerializeField] protected List<OnHoverBehaviour> nextSkill;
 
     protected CombatSystem combatSystem;
@@ -35,7 +37,7 @@ public class OnHoverBehaviour : MonoBehaviour
     {
         textBox.SetActive(true);
         textBox.GetComponent<HoverObject>().SetPosition(transform.position + new Vector3(0, 50 + (float)(textBox.GetComponent<RectTransform>().rect.height * 0.5)));
-        textBox.GetComponent<TextMeshProUGUI>().text = text;
+        textBox.GetComponent<TextMeshProUGUI>().text = pretext + text;
     }
 
     public void MouseExit()
@@ -48,8 +50,10 @@ public class OnHoverBehaviour : MonoBehaviour
         if (canBeLearned && combatSystem.SkillTreePoints > 0 && currentLevel < maxLevel)
         {
             combatSystem.SkillTreePoints--;
+            Level_Manager._LEVELMANAGER.skillpointsText.text = combatSystem.SkillTreePoints.ToString();
             if (currentLevel == 0)
             {
+                transform.GetChild(0).gameObject.SetActive(true);
                 foreach (OnHoverBehaviour skill in nextSkill)
                 {
                     if (!skill.canBeLearned)
@@ -59,12 +63,14 @@ public class OnHoverBehaviour : MonoBehaviour
                     }
                 }
                 position = player.GetNextFreeSlot();
-                player.UseNextFreeSlot(position, abilityAttached, isActivatable, alwaysOn);
+                player.UseNextFreeSlot(position, abilityAttached, isActivatable, alwaysOn, icon);
             } else
             {
                 player.LevelUpAbility(position);
             }
             currentLevel++;
+            pretext = "(" + currentLevel + "/" + maxLevel + ") ";
+            textBox.GetComponent<TextMeshProUGUI>().text = pretext + text;
         }
     }
 }

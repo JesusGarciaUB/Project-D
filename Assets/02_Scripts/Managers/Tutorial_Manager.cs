@@ -17,7 +17,6 @@ public class Tutorial_Manager : MonoBehaviour
     private bool activated = false;
     private bool com = false;
     [SerializeField] private List<EnemyBehaviour> enemies = new List<EnemyBehaviour>();
-
     private void Update()
     {
         if (tomove.gameObject.activeSelf)
@@ -66,6 +65,6 @@ public class Tutorial_Manager : MonoBehaviour
         tolevelup.gameObject.SetActive(false);
         tocomplete.gameObject.SetActive(true);
         yield return new WaitForSeconds(5);
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(1);
     }
 }

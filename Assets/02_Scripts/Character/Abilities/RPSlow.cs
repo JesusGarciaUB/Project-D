@@ -14,19 +14,24 @@ public class RPSlow : Base_ability
     private bool performedThisFrame = false;
     private bool performing = false;
     private float durationCounter = 0f;
-    private float cooldownCounter;
+    private float cooldownCounter = 0f;
 
     private void Start()
     {
         SetUpAbility();
-        cooldownCounter = cooldown;
     }
 
     private void Update()
     {
+        PurgeList();
         transform.position = Level_Manager._LEVELMANAGER.player.transform.position;
 
-        cooldownCounter += Time.deltaTime;
+        if (cooldownCounter > 0)
+        {
+            cooldownCounter -= Time.deltaTime;
+            textcd.text = cooldownCounter.ToString("F2");
+        }
+
         if (performing) durationCounter += Time.deltaTime;
 
         if (durationCounter >= duration && performing)
@@ -38,12 +43,22 @@ public class RPSlow : Base_ability
             }
         }
 
-        if (!performing && performedThisFrame && cooldownCounter >= cooldown)
+        if (cooldownCounter < 0)
         {
-            cooldownCounter = 0f;
+            cooldownCounter = 0;
+            textcd.gameObject.SetActive(false);
+            dark.SetActive(false);
+        }
+
+        if (!performing && performedThisFrame && cooldownCounter <= 0)
+        {
+            cooldownCounter = cooldown;
             durationCounter = 0f;
             performing = true;
             combatSystem.WasteMana(cost);
+            dark.SetActive(true);
+            textcd.gameObject.SetActive(true);
+            textcd.text = cooldown.ToString();
 
             foreach (GameObject enemy in enemies)
             {
@@ -52,6 +67,22 @@ public class RPSlow : Base_ability
         }
 
         performedThisFrame = false;
+    }
+
+    private void PurgeList()
+    {
+        List<int> toremove = new List<int>();
+        int count = 0;
+        foreach (GameObject enemy in enemies)
+        {
+            if (!enemy.GetComponent<EnemyBehaviour>().GetisAlive()) toremove.Add(count);
+            count++;
+        }
+
+        for(int x = toremove.Count; x > 0; x--)
+        {
+            enemies.Remove(enemies[toremove[x - 1]]);
+        }
     }
     public override void Performed()
     {
@@ -62,8 +93,12 @@ public class RPSlow : Base_ability
     {
         if (other.CompareTag("Enemy"))
         {
-            enemies.Add(other.gameObject);
-            if (performing) other.GetComponent<NavMeshAgent>().speed -= slow;
+            if (other.GetComponent<EnemyBehaviour>().GetisAlive())
+            {
+                enemies.Add(other.gameObject);
+                if (performing) other.GetComponent<NavMeshAgent>().speed -= slow;
+            }
+            
         }
     }
 
@@ -73,7 +108,6 @@ public class RPSlow : Base_ability
         {
             enemies.Remove(other.gameObject);
             if (performing) other.GetComponent<NavMeshAgent>().speed += slow;
-            if (!other.GetComponent<EnemyBehaviour>().GetisAlive()) enemies.Remove(other.gameObject);
         }
     }
 

@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Level_Manager : MonoBehaviour
 {
     //aqui guardamos al jugador en escena para que las demas clases puedan acceder a el
     [SerializeField] public GameObject player;
     [SerializeField] public GameObject onHoverObject;
+    [SerializeField] public TextMeshProUGUI skillpointsText;
 
     //Main ability
     public GameObject main_ability;

@@ -79,7 +79,7 @@ public class EnemyBehaviour : MonoBehaviour
     //hacemos daño al jugador en el frame que toca si esta a rango
     public void DealDamage()
     {
-        if (EnemyInAttackRange()) player.GetComponent<CombatSystem>().ReceiveDamage(damage);
+        if (EnemyInAttackRange() && isAlive) player.GetComponent<CombatSystem>().ReceiveDamage(damage);
     }
 
     //controlamos cuando acaba nuestra animacion de ataque
