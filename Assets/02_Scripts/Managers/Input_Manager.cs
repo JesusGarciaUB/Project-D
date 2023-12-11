@@ -16,6 +16,7 @@ public class Input_Manager : MonoBehaviour
     private float timeSinceWPressed = 0f;
     private float timeSinceEPressed = 0f;
     private float timeSinceRPressed = 0f;
+    private float timeSinceNPressed = 0f;
     private Vector3 mousePosition = Vector3.zero;
 
     private void Awake()
@@ -34,6 +35,7 @@ public class Input_Manager : MonoBehaviour
             inputs.Character.W.performed += WPressed;
             inputs.Character.E.performed += EPressed;
             inputs.Character.R.performed += RPressed;
+            inputs.Character.N.performed += NPressed;
 
             _INPUT_MANAGER = this;
             DontDestroyOnLoad(gameObject);
@@ -48,6 +50,7 @@ public class Input_Manager : MonoBehaviour
         timeSinceWPressed += Time.deltaTime;
         timeSinceEPressed += Time.deltaTime;
         timeSinceRPressed += Time.deltaTime;
+        timeSinceNPressed += Time.deltaTime;
 
         InputSystem.Update();
     }
@@ -88,6 +91,11 @@ public class Input_Manager : MonoBehaviour
         timeSinceRPressed = 0f;
     }
 
+    private void NPressed(InputAction.CallbackContext context)
+    {
+        timeSinceNPressed = 0f;
+    }
+
     //getters
     public bool GetClickPressed()
     {
@@ -118,5 +126,10 @@ public class Input_Manager : MonoBehaviour
     public bool GetRPressed()
     {
         return timeSinceRPressed == 0f;
+    }
+
+    public bool GetNPressed()
+    {
+        return timeSinceNPressed == 0f;
     }
 }

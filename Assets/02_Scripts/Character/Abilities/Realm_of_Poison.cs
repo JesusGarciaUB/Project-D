@@ -86,5 +86,6 @@ public class Realm_of_Poison : Base_ability
     {
         abilityLevel++;
         damage += 5;
+        cost += 1;
     }
 }

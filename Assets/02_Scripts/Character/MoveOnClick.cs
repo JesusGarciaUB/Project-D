@@ -20,6 +20,7 @@ public class MoveOnClick : MonoBehaviour
     private bool onGround = false;
     private bool onEnemy = false;
     private bool onRange = false;
+    private bool onSkilltree = false;
 
     //HITS DEL RAYCAST DEL RATON
     private Vector3 hitGround;
@@ -30,6 +31,9 @@ public class MoveOnClick : MonoBehaviour
     [SerializeField] private bool[] isActivatable = { false, false, false, false };
     [SerializeField] private bool[] alwaysOn = { false, false, false, false };
     private int nextFreeSlot = 0;
+
+    //SKILLTREE
+    [SerializeField] private GameObject skilltree;
 
     private void Awake()
     {
@@ -46,80 +50,90 @@ public class MoveOnClick : MonoBehaviour
             destination = myAgent.transform.position;
         }
 
-        //botones habilidades
-        if (combatSystem.isAlive)
+        if (Input_Manager._INPUT_MANAGER.GetNPressed())
         {
-            if (abilities.Count > 0)
-            {
-                if (Input_Manager._INPUT_MANAGER.GetQPressed() && abilities[0] != null)
-                {
-                    if (isActivatable[0] && !alwaysOn[0]) abilities[0].SetActive(!abilities[0].activeSelf);
-                    else if (isActivatable[0] && alwaysOn[0]) abilities[0].GetComponent<Base_ability>().Performed();
-                }
-            }
-
-            if (abilities.Count > 1)
-            {
-                if (Input_Manager._INPUT_MANAGER.GetWPressed() && abilities[1] != null)
-                {
-                    if (isActivatable[1] && !alwaysOn[1]) abilities[1].SetActive(!abilities[1].activeSelf);
-                    else if (isActivatable[1] && alwaysOn[1]) abilities[1].GetComponent<Base_ability>().Performed();
-                }
-            }
-
-            if (abilities.Count > 2)
-            {
-                if (Input_Manager._INPUT_MANAGER.GetEPressed() && abilities[2] != null)
-                {
-                    if (isActivatable[2] && !alwaysOn[2]) abilities[2].SetActive(!abilities[2].activeSelf);
-                    else if (isActivatable[2] && alwaysOn[2]) abilities[2].GetComponent<Base_ability>().Performed();
-                }
-            }
-
-            if (abilities.Count > 3)
-            {
-                if (Input_Manager._INPUT_MANAGER.GetRPressed() && abilities[3] != null)
-                {
-                    if (isActivatable[3] && !alwaysOn[3]) abilities[3].SetActive(!abilities[3].activeSelf);
-                    else if (isActivatable[3] && alwaysOn[3]) abilities[3].GetComponent<Base_ability>().Performed();
-                }
-            }
+            skilltree.SetActive(!skilltree.activeSelf);
+            onSkilltree = skilltree.activeSelf;
+            if (!onSkilltree) Level_Manager._LEVELMANAGER.onHoverObject.SetActive(false);
         }
 
-        //Setup por frame del raycast
-        MouseOver();
-
-        //Si el raton esta encima de un enemigo, el enemigo se pone como target en el script de combatsystem
-        if (onEnemy)
+        if (!onSkilltree)
         {
-            hitEnemy.gameObject.GetComponent<EnemyBehaviour>().MouseOverMob();
-        }
-        else GetComponent<CombatSystem>().target = null;
-
-        //Esto es setup tambien, pero debe ir despues de settear el enemigo como target
-        onRange = combatSystem.OnRange();
-
-        //comprovamos que no estemos en medio de atacar ni que estemos muertos
-        if (!attacking && combatSystem.isAlive)
-        {
-            //Click izquierdo
-            if (Input_Manager._INPUT_MANAGER.GetClickPressed())
+            //botones habilidades
+            if (combatSystem.isAlive)
             {
-                //Si pulsamos en el suelo o enemigo y no esta a rango nos movemos
-                if (onGround && !onRange)
+                if (abilities.Count > 0)
                 {
-                    destination = hitGround;
-                    myAgent.SetDestination(hitGround);
+                    if (Input_Manager._INPUT_MANAGER.GetQPressed() && abilities[0] != null)
+                    {
+                        if (isActivatable[0] && !alwaysOn[0]) abilities[0].SetActive(!abilities[0].activeSelf);
+                        else if (isActivatable[0] && alwaysOn[0]) abilities[0].GetComponent<Base_ability>().Performed();
+                    }
                 }
-                //Si pulsamos en un enemigo y estamos a rango
-                else if (onEnemy && onRange)
-                {
-                    Attacking();
-                    combatSystem.attackTarget = combatSystem.target;
 
-                    myAgent.SetDestination(myAgent.transform.position);
-                    destination = myAgent.transform.position;
-                    myAgent.transform.LookAt(combatSystem.target.transform);
+                if (abilities.Count > 1)
+                {
+                    if (Input_Manager._INPUT_MANAGER.GetWPressed() && abilities[1] != null)
+                    {
+                        if (isActivatable[1] && !alwaysOn[1]) abilities[1].SetActive(!abilities[1].activeSelf);
+                        else if (isActivatable[1] && alwaysOn[1]) abilities[1].GetComponent<Base_ability>().Performed();
+                    }
+                }
+
+                if (abilities.Count > 2)
+                {
+                    if (Input_Manager._INPUT_MANAGER.GetEPressed() && abilities[2] != null)
+                    {
+                        if (isActivatable[2] && !alwaysOn[2]) abilities[2].SetActive(!abilities[2].activeSelf);
+                        else if (isActivatable[2] && alwaysOn[2]) abilities[2].GetComponent<Base_ability>().Performed();
+                    }
+                }
+
+                if (abilities.Count > 3)
+                {
+                    if (Input_Manager._INPUT_MANAGER.GetRPressed() && abilities[3] != null)
+                    {
+                        if (isActivatable[3] && !alwaysOn[3]) abilities[3].SetActive(!abilities[3].activeSelf);
+                        else if (isActivatable[3] && alwaysOn[3]) abilities[3].GetComponent<Base_ability>().Performed();
+                    }
+                }
+            }
+
+            //Setup por frame del raycast
+            MouseOver();
+
+            //Si el raton esta encima de un enemigo, el enemigo se pone como target en el script de combatsystem
+            if (onEnemy)
+            {
+                hitEnemy.gameObject.GetComponent<EnemyBehaviour>().MouseOverMob();
+            }
+            else GetComponent<CombatSystem>().target = null;
+
+            //Esto es setup tambien, pero debe ir despues de settear el enemigo como target
+            onRange = combatSystem.OnRange();
+
+            //comprovamos que no estemos en medio de atacar ni que estemos muertos
+            if (!attacking && combatSystem.isAlive)
+            {
+                //Click izquierdo
+                if (Input_Manager._INPUT_MANAGER.GetClickPressed())
+                {
+                    //Si pulsamos en el suelo o enemigo y no esta a rango nos movemos
+                    if (onGround && !onRange)
+                    {
+                        destination = hitGround;
+                        myAgent.SetDestination(hitGround);
+                    }
+                    //Si pulsamos en un enemigo y estamos a rango
+                    else if (onEnemy && onRange)
+                    {
+                        Attacking();
+                        combatSystem.attackTarget = combatSystem.target;
+
+                        myAgent.SetDestination(myAgent.transform.position);
+                        destination = myAgent.transform.position;
+                        myAgent.transform.LookAt(combatSystem.target.transform);
+                    }
                 }
             }
         }
@@ -179,6 +193,14 @@ public class MoveOnClick : MonoBehaviour
 
     public void LevelUpAbility(int pos)
     {
+        bool wasActive = false;
+        if (abilities[pos].activeSelf)
+        {
+            abilities[pos].SetActive(false);
+            wasActive = true;
+        }
         abilities[pos].GetComponent<Base_ability>().LevelUpAbility();
+        if (wasActive) abilities[pos].SetActive(true);
+        
     }
 }

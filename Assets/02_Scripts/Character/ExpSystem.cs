@@ -66,4 +66,9 @@ public class ExpSystem : MonoBehaviour
         ExpbarSlider.value = currentExp;
         Exptext.text = currentExp.ToString();
     }
+
+    public int GetCurrentLevel()
+    {
+        return currentLevel;
+    }
 }
