@@ -104,7 +104,7 @@ public class CombatSystem : MonoBehaviour
     //hacemos daño a nuestro objetivo
     public void DoBasicAttack()
     {
-        attackTarget.GetComponent<EnemyBehaviour>().ReceiveDamage(basicAttackDamage);
+        if (attackTarget != null) attackTarget.GetComponent<EnemyBehaviour>().ReceiveDamage(basicAttackDamage);
     }
 
     //recivimos daño

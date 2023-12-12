@@ -65,6 +65,6 @@ public class Tutorial_Manager : MonoBehaviour
         tolevelup.gameObject.SetActive(false);
         tocomplete.gameObject.SetActive(true);
         yield return new WaitForSeconds(5);
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(2);
     }
 }
