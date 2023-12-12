@@ -53,6 +53,7 @@ public class MoveOnClick : MonoBehaviour
             destination = myAgent.transform.position;
         }
 
+        //para abrir/cerrar el arbol de habilidades
         if (Input_Manager._INPUT_MANAGER.GetNPressed())
         {
             skilltree.SetActive(!skilltree.activeSelf);
@@ -60,13 +61,15 @@ public class MoveOnClick : MonoBehaviour
             if (!onSkilltree) Level_Manager._LEVELMANAGER.onHoverObject.SetActive(false);
         }
 
+        //solo podremos enviar inputs si estamos fuera del arbol de habilidades
         if (!onSkilltree)
         {
-            //botones habilidades
+            //comprobamos que estemos vivos
             if (combatSystem.isAlive)
             {
                 if (abilities.Count > 0)
                 {
+                    //Q
                     if (Input_Manager._INPUT_MANAGER.GetQPressed() && abilities[0] != null)
                     {
                         if (isActivatable[0] && !alwaysOn[0]) abilities[0].SetActive(!abilities[0].activeSelf);
@@ -76,6 +79,7 @@ public class MoveOnClick : MonoBehaviour
 
                 if (abilities.Count > 1)
                 {
+                    //W
                     if (Input_Manager._INPUT_MANAGER.GetWPressed() && abilities[1] != null)
                     {
                         if (isActivatable[1] && !alwaysOn[1]) abilities[1].SetActive(!abilities[1].activeSelf);
@@ -85,6 +89,7 @@ public class MoveOnClick : MonoBehaviour
 
                 if (abilities.Count > 2)
                 {
+                    //E
                     if (Input_Manager._INPUT_MANAGER.GetEPressed() && abilities[2] != null)
                     {
                         if (isActivatable[2] && !alwaysOn[2]) abilities[2].SetActive(!abilities[2].activeSelf);
@@ -94,6 +99,7 @@ public class MoveOnClick : MonoBehaviour
 
                 if (abilities.Count > 3)
                 {
+                    //R
                     if (Input_Manager._INPUT_MANAGER.GetRPressed() && abilities[3] != null)
                     {
                         if (isActivatable[3] && !alwaysOn[3]) abilities[3].SetActive(!abilities[3].activeSelf);
@@ -102,7 +108,7 @@ public class MoveOnClick : MonoBehaviour
                 }
             }
 
-            //Setup por frame del raycast
+            //Setup por frame del raycast | TODO posiblemente se deba mover al principio si algunas habilidades dependen de ser apuntadas
             MouseOver();
 
             //Si el raton esta encima de un enemigo, el enemigo se pone como target en el script de combatsystem
@@ -142,6 +148,7 @@ public class MoveOnClick : MonoBehaviour
         }
     }
 
+    //nos setea las variables de posicion del raton, si estamos encima de un enemigo, suelo, etc..
     private void MouseOver()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input_Manager._INPUT_MANAGER.GetMousePosition());
@@ -156,12 +163,13 @@ public class MoveOnClick : MonoBehaviour
         if (onEnemy) hitEnemy = hit.transform;
     }
 
+    //funcion llamada por la animacion de atacar y por el controlador de inputs para determinar si estamos atacando
     public void Attacking()
     {
         attacking = !attacking;
     }
 
-    //Getters
+    //Getters para el script de animaciones
     public bool isMoving()
     {
         return Vector3.Distance(myAgent.transform.position, destination) > myAgent.stoppingDistance;
@@ -183,7 +191,9 @@ public class MoveOnClick : MonoBehaviour
         }
     }
 
+    //nos devuelve la siguiente posicion libre en la barra de acceso rapido
     public int GetNextFreeSlot() { return this.nextFreeSlot; }
+    //funcion llamada por el arbol de habilidades para aplicar una habilidad a la barra de acceso rapido
     public void UseNextFreeSlot(int pos, GameObject ability, bool activatable, bool aOn, Sprite icon) 
     {
         abilities.Add(ability);
@@ -196,6 +206,7 @@ public class MoveOnClick : MonoBehaviour
         abilities[pos].GetComponent<Base_ability>().SetUI(icon, quickAccessBar[pos].transform.GetChild(3).GetComponent<TextMeshProUGUI>(), quickAccessBar[pos].transform.GetChild(0).gameObject, quickAccessBar[pos].transform.GetChild(2).gameObject);
     }
 
+    //funcion llamada por el arbol de habilidades para subir de nivel una habilidad. Si la habilidad es una activa, reseteamos su estado para que aplique las nuevas stats
     public void LevelUpAbility(int pos)
     {
         bool wasActive = false;
