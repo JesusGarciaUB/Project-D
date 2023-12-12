@@ -98,6 +98,33 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": ""Press"",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""P"",
+                    ""type"": ""Button"",
+                    ""id"": ""0869c11d-2f1d-486a-837d-b7bf36507362"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press"",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""1"",
+                    ""type"": ""Button"",
+                    ""id"": ""d0eabe9d-b944-4d6f-bb4a-41dd33253436"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press"",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""2"",
+                    ""type"": ""Button"",
+                    ""id"": ""5ecd457a-8323-49c7-8f86-603f2fe3ac87"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press"",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -188,6 +215,39 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
                     ""action"": ""N"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""43749bd4-8a00-4b7c-91e5-1029668acb53"",
+                    ""path"": ""<Keyboard>/p"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""P"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e522cbdc-075b-4449-84b8-bdf4cedd63ac"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""abdac25e-f0ae-4776-b88f-d18992e391ed"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -204,6 +264,9 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
         m_Character_E = m_Character.FindAction("E", throwIfNotFound: true);
         m_Character_R = m_Character.FindAction("R", throwIfNotFound: true);
         m_Character_N = m_Character.FindAction("N", throwIfNotFound: true);
+        m_Character_P = m_Character.FindAction("P", throwIfNotFound: true);
+        m_Character__1 = m_Character.FindAction("1", throwIfNotFound: true);
+        m_Character__2 = m_Character.FindAction("2", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -273,6 +336,9 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
     private readonly InputAction m_Character_E;
     private readonly InputAction m_Character_R;
     private readonly InputAction m_Character_N;
+    private readonly InputAction m_Character_P;
+    private readonly InputAction m_Character__1;
+    private readonly InputAction m_Character__2;
     public struct CharacterActions
     {
         private @Inputs m_Wrapper;
@@ -285,6 +351,9 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
         public InputAction @E => m_Wrapper.m_Character_E;
         public InputAction @R => m_Wrapper.m_Character_R;
         public InputAction @N => m_Wrapper.m_Character_N;
+        public InputAction @P => m_Wrapper.m_Character_P;
+        public InputAction @_1 => m_Wrapper.m_Character__1;
+        public InputAction @_2 => m_Wrapper.m_Character__2;
         public InputActionMap Get() { return m_Wrapper.m_Character; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -318,6 +387,15 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
             @N.started += instance.OnN;
             @N.performed += instance.OnN;
             @N.canceled += instance.OnN;
+            @P.started += instance.OnP;
+            @P.performed += instance.OnP;
+            @P.canceled += instance.OnP;
+            @_1.started += instance.On_1;
+            @_1.performed += instance.On_1;
+            @_1.canceled += instance.On_1;
+            @_2.started += instance.On_2;
+            @_2.performed += instance.On_2;
+            @_2.canceled += instance.On_2;
         }
 
         private void UnregisterCallbacks(ICharacterActions instance)
@@ -346,6 +424,15 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
             @N.started -= instance.OnN;
             @N.performed -= instance.OnN;
             @N.canceled -= instance.OnN;
+            @P.started -= instance.OnP;
+            @P.performed -= instance.OnP;
+            @P.canceled -= instance.OnP;
+            @_1.started -= instance.On_1;
+            @_1.performed -= instance.On_1;
+            @_1.canceled -= instance.On_1;
+            @_2.started -= instance.On_2;
+            @_2.performed -= instance.On_2;
+            @_2.canceled -= instance.On_2;
         }
 
         public void RemoveCallbacks(ICharacterActions instance)
@@ -373,5 +460,8 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
         void OnE(InputAction.CallbackContext context);
         void OnR(InputAction.CallbackContext context);
         void OnN(InputAction.CallbackContext context);
+        void OnP(InputAction.CallbackContext context);
+        void On_1(InputAction.CallbackContext context);
+        void On_2(InputAction.CallbackContext context);
     }
 }

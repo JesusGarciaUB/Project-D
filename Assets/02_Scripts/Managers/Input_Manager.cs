@@ -17,6 +17,9 @@ public class Input_Manager : MonoBehaviour
     private float timeSinceEPressed = 0f;
     private float timeSinceRPressed = 0f;
     private float timeSinceNPressed = 0f;
+    private float timeSincePPressed = 0f;
+    private float timeSince1Pressed = 0f;
+    private float timeSince2Pressed = 0f;
     private Vector3 mousePosition = Vector3.zero;
 
     private void Awake()
@@ -36,6 +39,9 @@ public class Input_Manager : MonoBehaviour
             inputs.Character.E.performed += EPressed;
             inputs.Character.R.performed += RPressed;
             inputs.Character.N.performed += NPressed;
+            inputs.Character.P.performed += PPressed;
+            inputs.Character._1.performed += OnePressed;
+            inputs.Character._2.performed += TwoPressed;
 
             _INPUT_MANAGER = this;
             DontDestroyOnLoad(gameObject);
@@ -51,6 +57,9 @@ public class Input_Manager : MonoBehaviour
         timeSinceEPressed += Time.deltaTime;
         timeSinceRPressed += Time.deltaTime;
         timeSinceNPressed += Time.deltaTime;
+        timeSincePPressed += Time.deltaTime;
+        timeSince1Pressed += Time.deltaTime;
+        timeSince2Pressed += Time.deltaTime;
 
         InputSystem.Update();
     }
@@ -96,6 +105,21 @@ public class Input_Manager : MonoBehaviour
         timeSinceNPressed = 0f;
     }
 
+    private void PPressed(InputAction.CallbackContext context)
+    {
+        timeSincePPressed = 0f;
+    }
+
+    private void OnePressed(InputAction.CallbackContext context)
+    {
+        timeSince1Pressed = 0f;
+    }
+
+    private void TwoPressed(InputAction.CallbackContext context)
+    {
+        timeSince2Pressed = 0f;
+    }
+
     //getters
     public bool GetClickPressed()
     {
@@ -132,4 +156,12 @@ public class Input_Manager : MonoBehaviour
     {
         return timeSinceNPressed == 0f;
     }
+
+    public bool GetPPressed()
+    {
+        return timeSincePPressed == 0f;
+    }
+
+    public bool Get1Pressed() { return timeSince1Pressed == 0f;}
+    public bool Get2Pressed() {  return timeSince2Pressed == 0f;}
 }

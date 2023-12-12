@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class MoveOnClick : MonoBehaviour
 {
@@ -22,6 +23,7 @@ public class MoveOnClick : MonoBehaviour
     private bool onEnemy = false;
     private bool onRange = false;
     private bool onSkilltree = false;
+    private bool onPauseMenu = false;
 
     //HITS DEL RAYCAST DEL RATON
     private Vector3 hitGround;
@@ -36,6 +38,9 @@ public class MoveOnClick : MonoBehaviour
     //SKILLTREE
     [SerializeField] private GameObject skilltree;
 
+    //PAUSE
+    [SerializeField] private GameObject pause;
+
     //ICONS
     [SerializeField] private GameObject[] quickAccessBar;
     private void Awake()
@@ -46,6 +51,25 @@ public class MoveOnClick : MonoBehaviour
     }
     private void Update()
     {
+        //JANDUMODE
+        if(Input_Manager._INPUT_MANAGER.Get1Pressed())
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+
+        if(Input_Manager._INPUT_MANAGER.Get2Pressed())
+        {
+            combatSystem.SkillTreePoints += 50;
+            Level_Manager._LEVELMANAGER.skillpointsText.text = combatSystem.SkillTreePoints.ToString();
+        }
+
+        //menu de pausa
+        if (Input_Manager._INPUT_MANAGER.GetPPressed())
+        {
+            pause.SetActive(!pause.activeSelf);
+            onPauseMenu = pause.activeSelf;
+        }
+
         //si estamos muertos hacemos reset al movimiento del agente
         if (!combatSystem.isAlive)
         {
@@ -61,8 +85,8 @@ public class MoveOnClick : MonoBehaviour
             if (!onSkilltree) Level_Manager._LEVELMANAGER.onHoverObject.SetActive(false);
         }
 
-        //solo podremos enviar inputs si estamos fuera del arbol de habilidades
-        if (!onSkilltree)
+        //solo podremos enviar inputs si estamos fuera del arbol de habilidades y del menu de pausa
+        if (!onSkilltree && !onPauseMenu)
         {
             //comprobamos que estemos vivos
             if (combatSystem.isAlive)
@@ -136,7 +160,7 @@ public class MoveOnClick : MonoBehaviour
                     //Si pulsamos en un enemigo y estamos a rango
                     else if (onEnemy && onRange)
                     {
-                        Attacking();
+                        attacking = true;
                         combatSystem.attackTarget = combatSystem.target;
 
                         myAgent.SetDestination(myAgent.transform.position);
@@ -166,7 +190,8 @@ public class MoveOnClick : MonoBehaviour
     //funcion llamada por la animacion de atacar y por el controlador de inputs para determinar si estamos atacando
     public void Attacking()
     {
-        attacking = !attacking;
+        attacking = false;
+        //Debug.Log("STOP - ");
     }
 
     //Getters para el script de animaciones
@@ -218,5 +243,10 @@ public class MoveOnClick : MonoBehaviour
         abilities[pos].GetComponent<Base_ability>().LevelUpAbility();
         if (wasActive) abilities[pos].SetActive(true);
         
+    }
+
+    public void Enter()
+    {
+        //Debug.Log("START - ");
     }
 }

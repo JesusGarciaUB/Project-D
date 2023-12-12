@@ -29,6 +29,9 @@ public class EnemyBehaviour : MonoBehaviour
     private bool canAttack = true;
     private bool isAttacking = false;
 
+    //AUDIO
+    [SerializeField] private GameObject hitAudio;
+
     private void Awake()
     {
         levelText.text = level.ToString();
@@ -79,7 +82,9 @@ public class EnemyBehaviour : MonoBehaviour
     //hacemos daño al jugador en el frame que toca si esta a rango
     public void DealDamage()
     {
+        Debug.Log(player.name);
         if (EnemyInAttackRange() && isAlive) player.GetComponent<CombatSystem>().ReceiveDamage(damage);
+        Instantiate(hitAudio);
     }
 
     //controlamos cuando acaba nuestra animacion de ataque

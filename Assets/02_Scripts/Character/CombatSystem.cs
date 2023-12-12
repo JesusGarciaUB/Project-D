@@ -35,6 +35,9 @@ public class CombatSystem : MonoBehaviour
     [SerializeField] private TextMeshProUGUI manaText;
     [SerializeField] private TextMeshProUGUI maxManaText;
 
+    //AUDIOS
+    [SerializeField] private GameObject hitAudio;
+
     //AUXILIARES
     public bool isAlive = true;
     private float healthRegenCounter = 0f;
@@ -105,6 +108,7 @@ public class CombatSystem : MonoBehaviour
     public void DoBasicAttack()
     {
         if (attackTarget != null) attackTarget.GetComponent<EnemyBehaviour>().ReceiveDamage(basicAttackDamage);
+        Instantiate(hitAudio);
     }
 
     //recivimos daño
