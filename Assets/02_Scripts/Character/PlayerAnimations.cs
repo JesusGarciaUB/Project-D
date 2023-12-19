@@ -25,6 +25,7 @@ public class PlayerAnimations : MonoBehaviour
         {
             animator.SetBool("isAttacking", player.isAttacking());
             animator.SetBool("isMoving", player.isMoving());
+            if (player.AttackedThisFrame()) animator.SetTrigger("attack");
         } else
         {
             animator.SetBool("isAttacking", false);

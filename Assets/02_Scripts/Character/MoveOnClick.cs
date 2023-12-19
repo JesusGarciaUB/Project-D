@@ -11,12 +11,15 @@ public class MoveOnClick : MonoBehaviour
     //LAYERS
     public LayerMask clicableArea;
     public LayerMask enemyLayer;
+
     //AGENT
     private NavMeshAgent myAgent;
+
     //AUXILIARES
     private Vector3 destination;
     private CombatSystem combatSystem;
     public bool attacking = false;
+    private bool attackedThisFrame = false;
 
     //CONTROLADORES DE DONDE ESTA EL RATON
     private bool onGround = false;
@@ -51,6 +54,8 @@ public class MoveOnClick : MonoBehaviour
     }
     private void Update()
     {
+        attackedThisFrame = false;
+
         //JANDUMODE
         if(Input_Manager._INPUT_MANAGER.Get1Pressed())
         {
@@ -161,6 +166,7 @@ public class MoveOnClick : MonoBehaviour
                     else if (onEnemy && onRange)
                     {
                         attacking = true;
+                        attackedThisFrame = true;
                         combatSystem.attackTarget = combatSystem.target;
 
                         myAgent.SetDestination(myAgent.transform.position);
@@ -191,7 +197,6 @@ public class MoveOnClick : MonoBehaviour
     public void Attacking()
     {
         attacking = false;
-        //Debug.Log("STOP - ");
     }
 
     //Getters para el script de animaciones
@@ -203,6 +208,11 @@ public class MoveOnClick : MonoBehaviour
     public bool isAttacking()
     {
         return attacking;
+    }
+
+    public bool AttackedThisFrame()
+    {
+        return attackedThisFrame;
     }
 
     //si las habilidades son activas, las instanciamos para que solo haya 1 en escena
@@ -243,10 +253,5 @@ public class MoveOnClick : MonoBehaviour
         abilities[pos].GetComponent<Base_ability>().LevelUpAbility();
         if (wasActive) abilities[pos].SetActive(true);
         
-    }
-
-    public void Enter()
-    {
-        //Debug.Log("START - ");
     }
 }
